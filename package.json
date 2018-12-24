@@ -8,14 +8,20 @@
   },
   "devDependencies": {
     "codecov": "^3.1.0",
-    "eslint-config-react-redux": "^1.0.6"
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-react-redux": "^1.0.6",
+    "eslint-plugin-prettier": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ignore-path .gitignore --ignore-pattern src/serviceWorker.js --ext .js,.jsx ."
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier --list-different '**/*'",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern src/serviceWorker.js --ext .js,.jsx ."
   },
   "browserslist": [
     ">0.2%",
@@ -23,7 +29,17 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
   "eslintConfig": {
-    "extends": "react-redux"
+    "extends": [
+      "react-redux",
+      "plugin:prettier/recommended",
+      "prettier",
+      "prettier/react",
+      "prettier/unicorn"
+    ]
   }
 }
