@@ -1,0 +1,11 @@
+/.*config
+/.*ignore
+/build
+/coverage
+/flow-typed
+*.ico
+*.lock
+*.log
+*.png
+*.snap
+*.svg

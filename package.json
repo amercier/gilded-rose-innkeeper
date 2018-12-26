@@ -1,25 +1,62 @@
 {
-  "name": "gilded-rose-innkeeper",
-  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "^2.1.2"
+    "react-scripts": "^2.1.2",
+    "redux-saga": "^0.16.2"
+  },
+  "devDependencies": {
+    "codecov": "^3.1.0",
+    "cross-env": "^5.2.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-react-redux": "^1.0.6",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.2.1",
+    "lint-staged": "^8.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.15.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier --list-different '**/*'",
+    "lint:eslint": "eslint --ignore-path .gitignore --ignore-pattern src/serviceWorker.js --ext .js,.jsx ."
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "lint-staged": {
+    "*": [
+      "prettier --list-different"
+    ],
+    "*.{js,jsx}": [
+      "eslint",
+      "cross-env CI=run-once react-scripts test --bail --findRelatedTests"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-redux",
+      "plugin:prettier/recommended",
+      "prettier",
+      "prettier/react",
+      "prettier/unicorn"
+    ]
+  }
 }
