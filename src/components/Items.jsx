@@ -1,16 +1,17 @@
 import React from 'react';
 import { arrayOf } from 'prop-types';
-import Items from './Items';
 import Item from './Item';
 
-const App = ({ items }) => (
+const Items = ({ items }) => (
   <div>
-    <Items items={items} />
+    {(items || []).map(item => (
+      <Item key={item.id} item={item} />
+    ))}
   </div>
 );
 
-App.propTypes = {
+Items.propTypes = {
   items: arrayOf(Item.propTypes.item).isRequired,
 };
 
-export default App;
+export default Items;
