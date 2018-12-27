@@ -70,7 +70,7 @@ const App = () => (
   <Layout>
     <Header>
       <HeaderContent>
-        <Icon type="home" /> Gilded Rose Inn
+        <Icon type="home" /> Gilded Rose Inn - Administration
       </HeaderContent>
     </Header>
     <Content>
