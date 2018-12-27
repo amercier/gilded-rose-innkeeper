@@ -2217,6 +2217,12 @@ commander@~2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
 
+comment-parser@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/comment-parser/-/comment-parser-0.5.1.tgz#041fb38d943ba99b700aff44c13958681eb89adc"
+  dependencies:
+    readable-stream "^2.0.4"
+
 common-tags@^1.4.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
@@ -3141,6 +3147,10 @@ eslint-config-airbnb@17.1.0:
     object.assign "^4.1.0"
     object.entries "^1.0.4"
 
+eslint-config-jsdoc-strict@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-jsdoc-strict/-/eslint-config-jsdoc-strict-1.0.0.tgz#dbb4d8facd6fdb57b4027473a2b0e435fbe2794c"
+
 eslint-config-prettier@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-3.3.0.tgz#41afc8d3b852e757f06274ed6c44ca16f939a57d"
@@ -3248,6 +3258,14 @@ eslint-plugin-import@2.14.0:
 eslint-plugin-jest@21.26.1:
   version "21.26.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.26.1.tgz#73c5d6838d384fe6a9644077c27011bd99665ff2"
+
+eslint-plugin-jsdoc@^3.14.1:
+  version "3.14.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-3.14.1.tgz#465836dfde8e3061a66e69a95b21e83f9c89779e"
+  dependencies:
+    comment-parser "^0.5.1"
+    jsdoctypeparser "^2.0.0-alpha-8"
+    lodash "^4.17.11"
 
 eslint-plugin-jsx-a11y@6.1.2:
   version "6.1.2"
@@ -5332,6 +5350,10 @@ js-yaml@^3.12.0, js-yaml@^3.7.0, js-yaml@^3.9.0:
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
+
+jsdoctypeparser@^2.0.0-alpha-8:
+  version "2.0.0-alpha-8"
+  resolved "https://registry.yarnpkg.com/jsdoctypeparser/-/jsdoctypeparser-2.0.0-alpha-8.tgz#baf137fb8e2a558810adcf19d2d2a2f680e90a5f"
 
 jsdom@>=11.0.0:
   version "13.1.0"

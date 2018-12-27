@@ -14,8 +14,10 @@
   "devDependencies": {
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
+    "eslint-config-jsdoc-strict": "^1.0.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-config-react-redux": "^1.0.6",
+    "eslint-plugin-jsdoc": "^3.14.1",
     "eslint-plugin-prettier": "^3.0.0",
     "husky": "^1.2.1",
     "lint-staged": "^8.1.0",
@@ -58,6 +60,7 @@
   "eslintConfig": {
     "extends": [
       "react-redux",
+      "jsdoc-strict",
       "plugin:prettier/recommended",
       "prettier",
       "prettier/react",
