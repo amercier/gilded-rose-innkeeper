@@ -62,6 +62,16 @@
       "prettier",
       "prettier/react",
       "prettier/unicorn"
-    ]
+    ],
+    "rules": {
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".jsx"
+          ]
+        }
+      ]
+    }
   }
 }
