@@ -1,10 +1,8 @@
 import React from 'react';
-import { arrayOf } from 'prop-types';
 import { Icon } from 'antd';
 import styled from 'styled-components';
 import { ExternalLink } from './Link';
 import Items from './Items';
-import Item from './Item';
 
 const authorLink = (
   <ExternalLink href="https://github.com/amercier">Alex Mercier</ExternalLink>
@@ -80,7 +78,7 @@ const App = ({ items }) => (
 );
 
 App.propTypes = {
-  items: arrayOf(Item.propTypes.item).isRequired,
+  items: Items.propTypes.items.isRequired,
 };
 
 export default App;

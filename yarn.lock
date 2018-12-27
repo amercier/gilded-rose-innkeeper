@@ -4399,6 +4399,10 @@ https-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
 
+human-format@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/human-format/-/human-format-0.10.1.tgz#107793f355912e256148d5b5dcf66a0230187ee9"
+
 husky@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/husky/-/husky-1.2.1.tgz#33628f7013e345c1790a4dbe4642ad047f772dee"
@@ -8723,6 +8727,10 @@ shellwords@^0.1.1:
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
+
+simple-format-number@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/simple-format-number/-/simple-format-number-0.1.2.tgz#5e2a2d017971cdea9e22461993c73106bd9ab67a"
 
 simple-git@^1.85.0:
   version "1.107.0"
