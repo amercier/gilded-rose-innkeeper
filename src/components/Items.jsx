@@ -39,7 +39,7 @@ const Info = styled.span`
  * @returns {React.Element} The rendered element.
  */
 const Items = ({ items, minQuality, maxQuality }) => (
-  <Table dataSource={items} pagination={false}>
+  <Table dataSource={items} pagination={false} rowKey="id">
     <Column title="Name" key="name" dataIndex="name" />
     <Column
       title="Sell in"
