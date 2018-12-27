@@ -48,8 +48,11 @@ See the section about [running tests] for more information.
 ### Building
 
 ```bash
-yarn build
+REACT_APP_API_URL=http://localhost:8080 yarn build
 ```
+
+> **Note:** replace `http://localhost:8080` with the URL where the API is available in production,
+> ex: `/api`.
 
 Builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance.
