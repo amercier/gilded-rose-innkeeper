@@ -61,6 +61,17 @@ const Footer = styled.div`
   text-align: center;
 `;
 
+/**
+ * Root application component.
+ *
+ * @example
+ * <App items={[]} />
+ * // Renders the app
+ *
+ * @param {Object} props - React component properties.
+ * @param {Item[]} props.items - Items to render.
+ * @returns {React.Element} The rendered element.
+ */
 const App = ({ items }) => (
   <Layout>
     <Header>

@@ -28,6 +28,19 @@ const Info = styled.span`
   cursor: help;
 `;
 
+/**
+ * Render items in a table.
+ *
+ * @example
+ * <Items items={[]} />
+ * // Renders an empty table
+ *
+ * @param {Object} props - React component properties.
+ * @property {Item[]} items - Items to render.
+ * @property {number} minQuality - Minimum quality (Default: `0`).
+ * @property {number} maxQuality - Minimum quality (Default: `100`).
+ * @returns {React.Element} The rendered element.
+ */
 const Items = ({ items, minQuality, maxQuality }) => (
   <Table dataSource={items} pagination={false}>
     <Column title="Name" key="name" dataIndex="name" />
