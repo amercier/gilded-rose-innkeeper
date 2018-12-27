@@ -4,6 +4,19 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import 'antd/dist/antd.css';
 
+/**
+ * @typedef Item
+ *
+ * Item.
+ *
+ * @type {Object}
+ * @property {string} id - Item unique identifier.
+ * @property {string} name - Item name.
+ * @property {number} sellIn - Sell price.
+ * @property {number} quality - Quality (between 0 and 100).
+ * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
+ */
+
 const items = [
   {
     id: '1a08fbee-7d5c-4450-9636-0facebd3a6a2',
