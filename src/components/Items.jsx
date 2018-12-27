@@ -1,5 +1,6 @@
 import React from 'react';
 import { string, number, arrayOf, shape } from 'prop-types';
+import { connect } from 'react-redux';
 import { Progress, Table, Tooltip } from 'antd';
 import styled from 'styled-components';
 import humanFormat from 'human-format';
@@ -105,4 +106,14 @@ Items.defaultProps = {
   maxQuality: 100,
 };
 
-export default Items;
+/**
+ * Map Redux state to <Items> properties.
+ *
+ * @param {Item[]} state - Redux state.
+ * @returns {Object} Properties for <Items> component.
+ */
+const mapStateToProps = state => ({
+  items: state,
+});
+
+export default connect(mapStateToProps)(Items);
