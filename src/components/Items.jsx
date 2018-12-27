@@ -31,10 +31,6 @@ const Info = styled.span`
 /**
  * Render items in a table.
  *
- * @example
- * <Items items={[]} />
- * // Renders an empty table
- *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
  * @property {number} minQuality - Minimum quality (Default: `0`).

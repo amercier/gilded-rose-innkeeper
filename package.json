@@ -76,15 +76,8 @@
           ]
         }
       ],
-      "jsdoc/no-undefined-types": "off"
-    },
-    "overrides": {
-      "files": [
-        "src/reducers/*.js"
-      ],
-      "rules": {
-        "jsdoc/require-example": "off"
-      }
+      "jsdoc/no-undefined-types": "off",
+      "jsdoc/require-example": "off"
     }
   }
 }

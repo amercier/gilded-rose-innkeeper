@@ -64,10 +64,6 @@ const Footer = styled.div`
 /**
  * Root application component.
  *
- * @example
- * <App items={[]} />
- * // Renders the app
- *
  * @param {Object} props - React component properties.
  * @param {Item[]} props.items - Items to render.
  * @returns {React.Element} The rendered element.
