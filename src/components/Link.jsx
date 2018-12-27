@@ -4,10 +4,6 @@ import { string, node } from 'prop-types';
 /**
  * Render a link to an external web page.
  *
- * @example
- * <Link href="https://reactjs.org/">React</Link>
- * // Renders a <a> element
- *
  * @param {Object} props - React component properties.
  * @param {string} props.href - Href attribute.
  * @param {*} props.children - Child nodes.

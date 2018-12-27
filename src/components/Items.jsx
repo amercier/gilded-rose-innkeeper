@@ -1,5 +1,6 @@
 import React from 'react';
 import { string, number, arrayOf, shape } from 'prop-types';
+import { connect } from 'react-redux';
 import { Progress, Table, Tooltip } from 'antd';
 import styled from 'styled-components';
 import humanFormat from 'human-format';
@@ -31,10 +32,6 @@ const Info = styled.span`
 /**
  * Render items in a table.
  *
- * @example
- * <Items items={[]} />
- * // Renders an empty table
- *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
  * @property {number} minQuality - Minimum quality (Default: `0`).
@@ -42,7 +39,7 @@ const Info = styled.span`
  * @returns {React.Element} The rendered element.
  */
 const Items = ({ items, minQuality, maxQuality }) => (
-  <Table dataSource={items} pagination={false}>
+  <Table dataSource={items} pagination={false} rowKey="id">
     <Column title="Name" key="name" dataIndex="name" />
     <Column
       title="Sell in"
@@ -109,4 +106,14 @@ Items.defaultProps = {
   maxQuality: 100,
 };
 
-export default Items;
+/**
+ * Map Redux state to <Items> properties.
+ *
+ * @param {Item[]} state - Redux state.
+ * @returns {Object} Properties for <Items> component.
+ */
+const mapStateToProps = state => ({
+  items: state,
+});
+
+export default connect(mapStateToProps)(Items);

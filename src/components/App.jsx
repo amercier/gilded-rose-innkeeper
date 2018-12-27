@@ -64,15 +64,9 @@ const Footer = styled.div`
 /**
  * Root application component.
  *
- * @example
- * <App items={[]} />
- * // Renders the app
- *
- * @param {Object} props - React component properties.
- * @param {Item[]} props.items - Items to render.
  * @returns {React.Element} The rendered element.
  */
-const App = ({ items }) => (
+const App = () => (
   <Layout>
     <Header>
       <HeaderContent>
@@ -80,16 +74,12 @@ const App = ({ items }) => (
       </HeaderContent>
     </Header>
     <Content>
-      <Items items={items} />
+      <Items />
     </Content>
     <Footer>
       Created by {authorLink} for {employerLink}.
     </Footer>
   </Layout>
 );
-
-App.propTypes = {
-  items: Items.propTypes.items.isRequired,
-};
 
 export default App;
