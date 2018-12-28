@@ -22,6 +22,8 @@ const typeColors = {
   LEGENDARY: '#ff7a45',
 };
 
+const types = Object.keys(typeColors);
+
 const progressWidth = 48;
 
 const Info = styled.span`
@@ -32,6 +34,11 @@ const Info = styled.span`
 /**
  * Render items in a table.
  *
+ * TODO Refactor price to a separate <Price> component.
+ * TODO Add pagination to Redux store.
+ * TODO Implement onChange as per https://ant.design/components/table/#components-table-demo-ajax .
+ * TODO Move sorting logic to Redux store and selectors.
+ *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
  * @property {number} minQuality - Minimum quality (Default: `0`).
@@ -40,7 +47,12 @@ const Info = styled.span`
  */
 const Items = ({ items, minQuality, maxQuality }) => (
   <Table dataSource={items} pagination={false} rowKey="id">
-    <Column title="Name" key="name" dataIndex="name" />
+    <Column
+      title="Name"
+      key="name"
+      dataIndex="name"
+      sorter={(a, b) => a.name.localeCompare(b.name)}
+    />
     <Column
       title="Sell in"
       key="sellIn"
@@ -60,6 +72,7 @@ const Items = ({ items, minQuality, maxQuality }) => (
           sellIn
         )
       }
+      sorter={(a, b) => a.sellIn - b.sellIn}
     />
     <Column
       title="Quality"
@@ -74,6 +87,7 @@ const Items = ({ items, minQuality, maxQuality }) => (
           width={progressWidth}
         />
       )}
+      sorter={(a, b) => a.quality - b.quality}
     />
     <Column
       title="Type"
@@ -83,6 +97,7 @@ const Items = ({ items, minQuality, maxQuality }) => (
       render={type => (
         <span style={{ color: typeColors[type] }}>{typeLabels[type]}</span>
       )}
+      sorter={(a, b) => types.indexOf(a.type) - types.indexOf(b.type)}
     />
   </Table>
 );
