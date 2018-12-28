@@ -1,7 +1,7 @@
 {
   "private": true,
   "dependencies": {
-    "antd": "^3.11.6",
+    "antd": "3.11.2",
     "human-format": "^0.10.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",

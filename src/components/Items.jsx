@@ -34,10 +34,12 @@ const Info = styled.span`
 /**
  * Render items in a table.
  *
+ * TODO Add loading state.
  * TODO Refactor price to a separate <Price> component.
  * TODO Add pagination to Redux store.
  * TODO Implement onChange as per https://ant.design/components/table/#components-table-demo-ajax .
  * TODO Move sorting logic to Redux store and selectors.
+ * TODO Move filtering logic to Redux store and selectors.
  *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
@@ -98,6 +100,11 @@ const Items = ({ items, minQuality, maxQuality }) => (
         <span style={{ color: typeColors[type] }}>{typeLabels[type]}</span>
       )}
       sorter={(a, b) => types.indexOf(a.type) - types.indexOf(b.type)}
+      filters={Object.entries(typeLabels).map(([value, text]) => ({
+        value,
+        text,
+      }))}
+      onFilter={(value, { type }) => type === value}
     />
   </Table>
 );
