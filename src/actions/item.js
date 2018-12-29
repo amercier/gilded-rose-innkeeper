@@ -1,4 +1,8 @@
-import { ITEMS_ADD, ITEMS_FETCH } from '../constants/actionTypes';
+import {
+  ITEMS_ADD,
+  ITEMS_FETCH,
+  ITEMS_NAME_SEARCH,
+} from '../constants/actionTypes';
 
 /**
  * Create an action to add items.
@@ -18,4 +22,15 @@ export const doAddItems = items => ({
  */
 export const doFetchItems = () => ({
   type: ITEMS_FETCH,
+});
+
+/**
+ * Create an action to update name search filter.
+ *
+ * @param {string} query - The new name search query.
+ * @returns {Object} An action that consists in updating name filters.
+ */
+export const doNameSearch = query => ({
+  type: ITEMS_NAME_SEARCH,
+  query,
 });

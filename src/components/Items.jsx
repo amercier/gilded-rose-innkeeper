@@ -2,10 +2,12 @@ import React from 'react';
 import { string, number, arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { Progress, Table, Tooltip } from 'antd';
+import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
 import humanFormat from 'human-format';
 import formatNumber from 'simple-format-number';
 import { getVisibleItems } from '../selectors/item';
+import NameSearch from './NameSearch';
 
 const { Column } = Table;
 
@@ -32,6 +34,11 @@ const Info = styled.span`
   cursor: help;
 `;
 
+const Highlight = styled.em`
+  font-style: normal;
+  background: #ffc069;
+`;
+
 /**
  * Render items in a table.
  *
@@ -40,24 +47,33 @@ const Info = styled.span`
  * TODO Add pagination to Redux store.
  * TODO Implement onChange as per https://ant.design/components/table/#components-table-demo-ajax .
  * TODO Move sorting logic to Redux store and selectors.
- * TODO Move filtering logic to Redux store and selectors.
+ * TODO Move type filtering logic to Redux store and selectors.
  *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
+ * @property {string} nameSearch - Name search query.
  * @property {number} minQuality - Minimum quality (Default: `0`).
  * @property {number} maxQuality - Minimum quality (Default: `100`).
  * @returns {React.Element} The rendered element.
  */
-const Items = ({ items, minQuality, maxQuality }) => (
+const Items = ({ items, nameSearch, minQuality, maxQuality }) => (
   <Table dataSource={items} pagination={false} rowKey="id">
     <Column
-      title="Name"
+      title={() => <NameSearch />}
       key="name"
       dataIndex="name"
+      render={text => (
+        <Highlighter
+          searchWords={[nameSearch]}
+          textToHighlight={text}
+          highlightTag={({ children }) => <Highlight>{children}</Highlight>}
+          autoEscape
+        />
+      )}
       sorter={(a, b) => a.name.localeCompare(b.name)}
     />
     <Column
-      title="Sell in"
+      title="Price"
       key="sellIn"
       dataIndex="sellIn"
       align="right"
@@ -120,6 +136,7 @@ Items.propTypes = {
       type: string.isRequired,
     }).isRequired,
   ).isRequired,
+  nameSearch: string.isRequired,
   minQuality: number,
   maxQuality: number,
 };
@@ -137,6 +154,7 @@ Items.defaultProps = {
  */
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
+  nameSearch: state.nameSearch,
 });
 
 export default connect(mapStateToProps)(Items);

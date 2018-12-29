@@ -1,4 +1,4 @@
-import { ITEMS_ADD } from '../constants/actionTypes';
+import { ITEMS_ADD, ITEMS_NAME_SEARCH } from '../constants/actionTypes';
 
 /**
  * @typedef Item
@@ -15,6 +15,7 @@ import { ITEMS_ADD } from '../constants/actionTypes';
 
 const INITIAL_STATE = {
   items: [],
+  nameSearch: '',
 };
 
 /**
@@ -27,9 +28,10 @@ const INITIAL_STATE = {
 function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ITEMS_ADD: {
-      return {
-        items: action.items,
-      };
+      return { ...state, items: action.items };
+    }
+    case ITEMS_NAME_SEARCH: {
+      return { ...state, nameSearch: action.query };
     }
     default:
       return state;
