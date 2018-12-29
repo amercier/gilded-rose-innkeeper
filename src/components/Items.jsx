@@ -5,6 +5,7 @@ import { Progress, Table, Tooltip } from 'antd';
 import styled from 'styled-components';
 import humanFormat from 'human-format';
 import formatNumber from 'simple-format-number';
+import { getVisibleItems } from '../selectors/item';
 
 const { Column } = Table;
 
@@ -135,7 +136,7 @@ Items.defaultProps = {
  * @returns {Object} Properties for <Items> component.
  */
 const mapStateToProps = state => ({
-  items: state,
+  items: getVisibleItems(state),
 });
 
 export default connect(mapStateToProps)(Items);

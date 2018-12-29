@@ -3,10 +3,11 @@
  *
  * Right now all items are visible, so we just return all of them.
  *
- * @param {Item[]} items - All items.
+ * @param {Object} state - Redux state.
+ * @param {Item[]} state.items - All items.
  * @returns {Item[]} All visible items.
  */
-function getVisibleItems(items) {
+function getVisibleItems({ items }) {
   return items;
 }
 

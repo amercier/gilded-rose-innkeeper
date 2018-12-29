@@ -77,6 +77,8 @@
           ]
         }
       ],
+      "fp/no-class": "off",
+      "fp/no-this": "off",
       "jsdoc/no-undefined-types": "off",
       "jsdoc/require-example": "off"
     }

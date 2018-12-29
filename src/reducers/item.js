@@ -13,19 +13,23 @@ import { ITEMS_ADD } from '../constants/actionTypes';
  * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
  */
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = {
+  items: [],
+};
 
 /**
  * Item reducer.
  *
  * @param {Object} [state=INITIAL_STATE] - Previous state.
- * @param {string} action - Action key.
+ * @param {string} action - Action type and data.
  * @returns {Object} Next state.
  */
 function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ITEMS_ADD: {
-      return action.items;
+      return {
+        items: action.items,
+      };
     }
     default:
       return state;
