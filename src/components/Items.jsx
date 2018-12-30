@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, number, arrayOf, shape } from 'prop-types';
+import { bool, string, number, arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
 import { Progress, Table, Tooltip } from 'antd';
 import Highlighter from 'react-highlight-words';
@@ -64,13 +64,14 @@ const FilterContainer = styled.div`
  *
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
+ * @property {boolean} loading - Whether items are being loaded.
  * @property {string} nameSearch - Name search query.
  * @property {number} qualityMin - Minimum quality (Default: `0`).
  * @property {number} qualityMax - Minimum quality (Default: `100`).
  * @returns {React.Element} The rendered element.
  */
-const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
-  <Table dataSource={items} pagination={false} rowKey="id">
+const Items = ({ items, loading, nameSearch, qualityMin, qualityMax }) => (
+  <Table dataSource={items} loading={loading} pagination={false} rowKey="id">
     <Column
       title={<ConnectedNameSearch />}
       key="name"
@@ -162,6 +163,7 @@ Items.propTypes = {
       type: string.isRequired,
     }).isRequired,
   ).isRequired,
+  loading: bool.isRequired,
   nameSearch: string.isRequired,
   qualityMin: number.isRequired,
   qualityMax: number.isRequired,
@@ -175,6 +177,7 @@ Items.propTypes = {
  */
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
+  loading: state.fetchingItems,
   nameSearch: state.nameSearch,
   qualityMin: state.qualityMin,
   qualityMax: state.qualityMax,
