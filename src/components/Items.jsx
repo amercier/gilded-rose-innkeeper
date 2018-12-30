@@ -8,6 +8,7 @@ import humanFormat from 'human-format';
 import formatNumber from 'simple-format-number';
 import { getVisibleItems } from '../selectors/item';
 import NameSearch from './NameSearch';
+import QualityFilter from './QualityFilter';
 
 const { Column } = Table;
 
@@ -39,6 +40,15 @@ const Highlight = styled.em`
   background: #ffc069;
 `;
 
+// TODO Reuse Ant Design dropdown styles
+const FilterContainer = styled.div`
+  width: 20rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+`;
+
 /**
  * Render items in a table.
  *
@@ -52,11 +62,11 @@ const Highlight = styled.em`
  * @param {Object} props - React component properties.
  * @property {Item[]} items - Items to render.
  * @property {string} nameSearch - Name search query.
- * @property {number} minQuality - Minimum quality (Default: `0`).
- * @property {number} maxQuality - Minimum quality (Default: `100`).
+ * @property {number} qualityMin - Minimum quality (Default: `0`).
+ * @property {number} qualityMax - Minimum quality (Default: `100`).
  * @returns {React.Element} The rendered element.
  */
-const Items = ({ items, nameSearch, minQuality, maxQuality }) => (
+const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
   <Table dataSource={items} pagination={false} rowKey="id">
     <Column
       title={() => <NameSearch />}
@@ -101,12 +111,17 @@ const Items = ({ items, nameSearch, minQuality, maxQuality }) => (
       render={quality => (
         <Progress
           type="circle"
-          percent={(100 * (quality - minQuality)) / maxQuality}
+          percent={(100 * (quality - qualityMin)) / qualityMax}
           format={() => quality}
           width={progressWidth}
         />
       )}
       sorter={(a, b) => a.quality - b.quality}
+      filterDropdown={() => (
+        <FilterContainer>
+          <QualityFilter />
+        </FilterContainer>
+      )}
     />
     <Column
       title="Type"
@@ -137,13 +152,8 @@ Items.propTypes = {
     }).isRequired,
   ).isRequired,
   nameSearch: string.isRequired,
-  minQuality: number,
-  maxQuality: number,
-};
-
-Items.defaultProps = {
-  minQuality: 0,
-  maxQuality: 100,
+  qualityMin: number.isRequired,
+  qualityMax: number.isRequired,
 };
 
 /**
@@ -155,6 +165,8 @@ Items.defaultProps = {
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
   nameSearch: state.nameSearch,
+  qualityMin: state.qualityMin,
+  qualityMax: state.qualityMax,
 });
 
 export default connect(mapStateToProps)(Items);

@@ -1,4 +1,8 @@
-import { ITEMS_ADD, ITEMS_NAME_SEARCH } from '../constants/actionTypes';
+import {
+  ITEMS_ADD,
+  ITEMS_NAME_SEARCH,
+  ITEMS_QUALITY_FILTER,
+} from '../constants/actionTypes';
 
 /**
  * @typedef Item
@@ -16,6 +20,10 @@ import { ITEMS_ADD, ITEMS_NAME_SEARCH } from '../constants/actionTypes';
 const INITIAL_STATE = {
   items: [],
   nameSearch: '',
+  qualityMin: 0,
+  qualityMax: 100,
+  qualityRangeStart: 0,
+  qualityRangeEnd: 100,
 };
 
 /**
@@ -32,6 +40,13 @@ function itemReducer(state = INITIAL_STATE, action) {
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };
+    }
+    case ITEMS_QUALITY_FILTER: {
+      return {
+        ...state,
+        qualityRangeStart: action.rangeStart,
+        qualityRangeEnd: action.rangeEnd,
+      };
     }
     default:
       return state;
