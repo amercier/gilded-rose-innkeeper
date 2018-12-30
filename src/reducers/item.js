@@ -22,9 +22,50 @@ const INITIAL_STATE = {
   nameSearch: '',
   qualityMin: 0,
   qualityMax: 100,
-  qualityRangeStart: 0,
-  qualityRangeEnd: 100,
+  qualityRangeStart: null,
+  qualityRangeEnd: null,
+  sellInMin: null,
+  sellInMax: null,
+  sellInRangeStart: null,
+  sellInRangeEnd: null,
 };
+
+/**
+ * Get the minimum and maximum value of a given property within an array of objects.
+ *
+ * @param {Objects[]} objects - Objects.
+ * @param {string} property - Proprty name.
+ * @param {*} defaultMinValue - Value returned as min for an empty array.
+ * @param {*} defaultMaxValue - Value returned as max for an empty array.
+ * @returns {number[]} - An array containing the min an max value: `[min, max]`.
+ */
+function getMinMax(objects, property, defaultMinValue, defaultMaxValue) {
+  return objects.reduce(
+    ([min, max], { [property]: value }) => {
+      const newMin = min === defaultMinValue ? value : Math.min(min, value);
+      const newMax = max === defaultMaxValue ? value : Math.max(max, value);
+      return [newMin, newMax];
+    },
+    [defaultMinValue, defaultMaxValue],
+  );
+}
+
+/**
+ * Add items and update sellIn min/max values.
+ *
+ * @param {Object} state - State.
+ * @param {Item[]} items - Items to add.
+ * @returns {Object} - The new state.
+ */
+function doItemsAdd(state, items) {
+  const [sellInMin, sellInMax] = getMinMax(items, 'sellIn', null, null);
+  return {
+    ...state,
+    items,
+    sellInMin,
+    sellInMax,
+  };
+}
 
 /**
  * Item reducer.
@@ -36,7 +77,7 @@ const INITIAL_STATE = {
 function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ITEMS_ADD: {
-      return { ...state, items: action.items };
+      return doItemsAdd(state, action.items);
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };

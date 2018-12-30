@@ -22,7 +22,9 @@ function propertySearchFilter(property, query) {
  * `true`.
  */
 function propertyMinMaxFilter(property, min, max) {
-  return subject => subject[property] >= min && subject[property] <= max;
+  return subject =>
+    (min === null || subject[property] >= min) &&
+    (max === null || subject[property] <= max);
 }
 
 /**
