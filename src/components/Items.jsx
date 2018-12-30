@@ -26,6 +26,8 @@ const typeColors = {
   LEGENDARY: '#ff7a45',
 };
 
+const sellInFilters = [[0, 2], [2, 5], [5, 10], [10, 20], [20, +Infinity]];
+
 const types = Object.keys(typeColors);
 
 const progressWidth = 48;
@@ -57,6 +59,7 @@ const FilterContainer = styled.div`
  * TODO Add pagination to Redux store.
  * TODO Implement onChange as per https://ant.design/components/table/#components-table-demo-ajax .
  * TODO Move sorting logic to Redux store and selectors.
+ * TODO Move sellIn filtering logic to Redux store and selectors.
  * TODO Move type filtering logic to Redux store and selectors.
  *
  * @param {Object} props - React component properties.
@@ -69,7 +72,7 @@ const FilterContainer = styled.div`
 const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
   <Table dataSource={items} pagination={false} rowKey="id">
     <Column
-      title={() => <NameSearch />}
+      title={<NameSearch />}
       key="name"
       dataIndex="name"
       render={text => (
@@ -102,6 +105,14 @@ const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
         )
       }
       sorter={(a, b) => a.sellIn - b.sellIn}
+      filters={sellInFilters.map(([min, max]) => ({
+        value: `${min}:${max}`,
+        text: max === +Infinity ? `Higher than ${min}` : `${min} to ${max}`,
+      }))}
+      onFilter={(value, { sellIn }) => {
+        const [min, max] = value.split(':');
+        return sellIn >= min && sellIn <= max;
+      }}
     />
     <Column
       title="Quality"
