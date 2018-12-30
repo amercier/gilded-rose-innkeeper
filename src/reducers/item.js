@@ -2,6 +2,7 @@ import {
   ITEMS_ADD,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
+  ITEMS_SELL_IN_FILTER,
 } from '../constants/actionTypes';
 
 /**
@@ -87,6 +88,13 @@ function itemReducer(state = INITIAL_STATE, action) {
         ...state,
         qualityRangeStart: action.rangeStart,
         qualityRangeEnd: action.rangeEnd,
+      };
+    }
+    case ITEMS_SELL_IN_FILTER: {
+      return {
+        ...state,
+        sellInRangeStart: action.rangeStart,
+        sellInRangeEnd: action.rangeEnd,
       };
     }
     default:

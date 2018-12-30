@@ -51,11 +51,14 @@ function getVisibleItems({
   nameSearch,
   qualityRangeStart,
   qualityRangeEnd,
+  sellInRangeStart,
+  sellInRangeEnd,
 }) {
   return items.filter(
     all(
       propertySearchFilter('name', nameSearch),
       propertyMinMaxFilter('quality', qualityRangeStart, qualityRangeEnd),
+      propertyMinMaxFilter('sellIn', sellInRangeStart, sellInRangeEnd),
     ),
   );
 }

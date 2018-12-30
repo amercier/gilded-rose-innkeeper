@@ -9,6 +9,7 @@ import formatNumber from 'simple-format-number';
 import { getVisibleItems } from '../selectors/item';
 import NameSearch from './NameSearch';
 import QualityFilter from './QualityFilter';
+import SellInFilter from './SellInFilter';
 
 const { Column } = Table;
 
@@ -102,6 +103,11 @@ const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
         )
       }
       sorter={(a, b) => a.sellIn - b.sellIn}
+      filterDropdown={() => (
+        <FilterContainer onClick={e => e.stopPropagation()}>
+          <SellInFilter />
+        </FilterContainer>
+      )}
     />
     <Column
       title="Quality"
@@ -118,7 +124,7 @@ const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
       )}
       sorter={(a, b) => a.quality - b.quality}
       filterDropdown={() => (
-        <FilterContainer>
+        <FilterContainer onClick={e => e.stopPropagation()}>
           <QualityFilter />
         </FilterContainer>
       )}

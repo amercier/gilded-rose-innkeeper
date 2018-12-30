@@ -3,6 +3,7 @@ import {
   ITEMS_FETCH,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
+  ITEMS_SELL_IN_FILTER,
 } from '../constants/actionTypes';
 
 /**
@@ -45,6 +46,19 @@ export const doNameSearch = query => ({
  */
 export const doQualityFilter = (rangeStart, rangeEnd) => ({
   type: ITEMS_QUALITY_FILTER,
+  rangeStart,
+  rangeEnd,
+});
+
+/**
+ * Create an action to update the sellIn min/max filter.
+ *
+ * @param {number} rangeStart - Minimum sellIn to display.
+ * @param {number} rangeEnd - Maximum sellIn to display.
+ * @returns {Object} An action that consists in updating the sellIn filter.
+ */
+export const doSellInFilter = (rangeStart, rangeEnd) => ({
+  type: ITEMS_SELL_IN_FILTER,
   rangeStart,
   rangeEnd,
 });

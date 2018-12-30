@@ -1,6 +1,6 @@
 import React from 'react';
 import { number, func } from 'prop-types';
-import { Slider } from 'antd';
+import RangeSlider from './RangeSlider';
 
 /**
  * Create a `marks` object for Ant Design `<Slider>` component's `marks` property. Set a label for
@@ -46,19 +46,15 @@ function marksObject(min, max, marks) {
  * `(rangeStart: number, rangeEnd: number) => *`, called when range changes.
  * @returns {React.Element} - Rendered React element.
  */
-const MinMaxFilter = ({ min, max, marks, rangeStart, rangeEnd, onChange }) => {
-  const actualRangeStart = rangeStart === null ? min : rangeStart;
-  const actualRangeEnd = rangeEnd === null ? max : rangeEnd;
-  return (
-    <Slider
-      range
-      disabled={min === null || max === null}
-      defaultValue={[actualRangeStart, actualRangeEnd]}
-      marks={marksObject(min, max, marks)}
-      {...{ min, max, onChange }}
-    />
-  );
-};
+const MinMaxFilter = ({ min, max, marks, rangeStart, rangeEnd, onChange }) => (
+  <RangeSlider
+    disabled={min === null || max === null}
+    marks={marksObject(min, max, marks)}
+    start={rangeStart}
+    end={rangeEnd}
+    {...{ min, max, onChange }}
+  />
+);
 
 MinMaxFilter.propTypes = {
   min: number,
