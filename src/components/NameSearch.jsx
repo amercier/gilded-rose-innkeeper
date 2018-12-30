@@ -12,7 +12,7 @@ import { doNameSearch } from '../actions/item';
  * @param {func} props.onChange - Function to call when.
  * @returns {React.Element} - Rendered React element.
  */
-const NameSearch = ({ value, onChange }) => (
+export const NameSearch = ({ value, onChange }) => (
   <Input
     placeholder="Name"
     value={value}
