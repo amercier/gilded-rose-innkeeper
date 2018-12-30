@@ -8263,6 +8263,11 @@ recursive-readdir@2.2.2:
   dependencies:
     minimatch "3.0.4"
 
+redux-debounced@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/redux-debounced/-/redux-debounced-0.5.0.tgz#4dde27a3e66ea428afe78215f30a27f22714605b"
+  integrity sha512-O2anhB0A6yQZH19uLETFtajcUQLcyiJcgC0hHSoFr5T3hWGtt0C5s6KNnb2RX51MwCh5VCl9ehZTv91F/rsZww==
+
 redux-saga@^0.16.2:
   version "0.16.2"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.2.tgz#993662e86bc945d8509ac2b8daba3a8c615cc971"
