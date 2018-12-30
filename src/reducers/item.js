@@ -1,4 +1,5 @@
 import {
+  ITEMS_FETCH,
   ITEMS_ADD,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
@@ -35,8 +36,11 @@ const INITIAL_STATE = {
  */
 function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case ITEMS_FETCH: {
+      return { ...state, fetchingItems: true };
+    }
     case ITEMS_ADD: {
-      return { ...state, items: action.items };
+      return { ...state, items: action.items, fetchingItems: false };
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };
