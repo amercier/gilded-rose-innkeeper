@@ -48,7 +48,14 @@ function marksObject(min, max, marks) {
  * `(rangeStart: number, rangeEnd: number) => *`, called when range changes.
  * @returns {React.Element} - Rendered React element.
  */
-const QualityFilter = ({ min, max, marks, rangeStart, rangeEnd, onChange }) => (
+export const QualityFilter = ({
+  min,
+  max,
+  marks,
+  rangeStart,
+  rangeEnd,
+  onChange,
+}) => (
   <Slider
     range
     defaultValue={[rangeStart, rangeEnd]}
