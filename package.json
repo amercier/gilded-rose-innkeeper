@@ -80,6 +80,7 @@
       ],
       "fp/no-class": "off",
       "fp/no-this": "off",
+      "fp/no-rest-parameters": "off",
       "jsdoc/no-undefined-types": "off",
       "jsdoc/require-example": "off"
     }

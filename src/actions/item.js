@@ -2,6 +2,7 @@ import {
   ITEMS_ADD,
   ITEMS_FETCH,
   ITEMS_NAME_SEARCH,
+  ITEMS_QUALITY_FILTER,
 } from '../constants/actionTypes';
 
 /**
@@ -28,9 +29,22 @@ export const doFetchItems = () => ({
  * Create an action to update name search filter.
  *
  * @param {string} query - The new name search query.
- * @returns {Object} An action that consists in updating name filters.
+ * @returns {Object} An action that consists in updating the name filter.
  */
 export const doNameSearch = query => ({
   type: ITEMS_NAME_SEARCH,
   query,
+});
+
+/**
+ * Create an action to update the quality min/max filter.
+ *
+ * @param {number} rangeStart - Minimum quality to display.
+ * @param {number} rangeEnd - Maximum quality to display.
+ * @returns {Object} An action that consists in updating the quality filter.
+ */
+export const doQualityFilter = (rangeStart, rangeEnd) => ({
+  type: ITEMS_QUALITY_FILTER,
+  rangeStart,
+  rangeEnd,
 });
