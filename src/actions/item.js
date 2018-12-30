@@ -34,11 +34,6 @@ export const doFetchItems = () => ({
 export const doNameSearch = query => ({
   type: ITEMS_NAME_SEARCH,
   query,
-  meta: {
-    debounce: {
-      time: 200,
-    },
-  },
 });
 
 /**
