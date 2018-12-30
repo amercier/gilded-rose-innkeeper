@@ -7,8 +7,8 @@ import styled from 'styled-components';
 import humanFormat from 'human-format';
 import formatNumber from 'simple-format-number';
 import { getVisibleItems } from '../selectors/item';
-import NameSearch from './NameSearch';
-import QualityFilter from './QualityFilter';
+import ConnectedNameSearch from './NameSearch';
+import ConnectedQualityFilter from './QualityFilter';
 
 const { Column } = Table;
 
@@ -72,7 +72,7 @@ const FilterContainer = styled.div`
 const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
   <Table dataSource={items} pagination={false} rowKey="id">
     <Column
-      title={<NameSearch />}
+      title={<ConnectedNameSearch />}
       key="name"
       dataIndex="name"
       render={text => (
@@ -130,7 +130,7 @@ const Items = ({ items, nameSearch, qualityMin, qualityMax }) => (
       sorter={(a, b) => a.quality - b.quality}
       filterDropdown={() => (
         <FilterContainer>
-          <QualityFilter />
+          <ConnectedQualityFilter />
         </FilterContainer>
       )}
     />
