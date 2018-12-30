@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NameSearch renders its components 1`] = `
+<Input
+  disabled={false}
+  onChange={[Function]}
+  onClick={[Function]}
+  placeholder="Name"
+  prefix={
+    <Icon
+      style={
+        Object {
+          "color": "#1890ff",
+        }
+      }
+      type="search"
+    />
+  }
+  prefixCls="ant-input"
+  suffix={
+    <Icon
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "rgba(0,0,0,.25)",
+        }
+      }
+      type="close"
+    />
+  }
+  type="text"
+  value="INITIAL VALUE"
+/>
+`;

@@ -1,4 +1,8 @@
-import { ITEMS_ADD } from '../constants/actionTypes';
+import {
+  ITEMS_ADD,
+  ITEMS_NAME_SEARCH,
+  ITEMS_QUALITY_FILTER,
+} from '../constants/actionTypes';
 
 /**
  * @typedef Item
@@ -13,19 +17,36 @@ import { ITEMS_ADD } from '../constants/actionTypes';
  * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
  */
 
-const INITIAL_STATE = [];
+const INITIAL_STATE = {
+  items: [],
+  nameSearch: '',
+  qualityMin: 0,
+  qualityMax: 100,
+  qualityRangeStart: 0,
+  qualityRangeEnd: 100,
+};
 
 /**
  * Item reducer.
  *
  * @param {Object} [state=INITIAL_STATE] - Previous state.
- * @param {string} action - Action key.
+ * @param {string} action - Action type and data.
  * @returns {Object} Next state.
  */
 function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ITEMS_ADD: {
-      return action.items;
+      return { ...state, items: action.items };
+    }
+    case ITEMS_NAME_SEARCH: {
+      return { ...state, nameSearch: action.query };
+    }
+    case ITEMS_QUALITY_FILTER: {
+      return {
+        ...state,
+        qualityRangeStart: action.rangeStart,
+        qualityRangeEnd: action.rangeEnd,
+      };
     }
     default:
       return state;
