@@ -20,6 +20,8 @@ import {
 
 const INITIAL_STATE = {
   items: [],
+  fetchingItems: false,
+  fetchedItemsOnce: false,
   nameSearch: '',
   qualityMin: 0,
   qualityMax: 100,
@@ -40,7 +42,12 @@ function itemReducer(state = INITIAL_STATE, action) {
       return { ...state, fetchingItems: true };
     }
     case ITEMS_ADD: {
-      return { ...state, items: action.items, fetchingItems: false };
+      return {
+        ...state,
+        items: action.items,
+        fetchingItems: false,
+        fetchedItemsOnce: true,
+      };
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };

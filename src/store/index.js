@@ -3,7 +3,7 @@ import createDebounceMiddleware from 'redux-debounced';
 import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import itemReducer from '../reducers/item';
-import { doFetchItems } from '../actions/item';
+import { doStartPollingItems } from '../actions/item';
 import rootSaga from '../sagas';
 
 const debounce = createDebounceMiddleware();
@@ -22,7 +22,7 @@ const store = createStore(
 // Run the root saga (ie: start listening for actions)
 saga.run(rootSaga);
 
-// Trigger initial items fetch action
-store.dispatch(doFetchItems());
+// Start items polling
+store.dispatch(doStartPollingItems());
 
 export default store;

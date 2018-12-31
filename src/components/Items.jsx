@@ -177,7 +177,7 @@ Items.propTypes = {
  */
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
-  loading: state.fetchingItems,
+  loading: state.fetchingItems && !state.fetchedItemsOnce,
   nameSearch: state.nameSearch,
   qualityMin: state.qualityMin,
   qualityMax: state.qualityMax,

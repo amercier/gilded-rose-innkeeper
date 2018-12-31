@@ -85,6 +85,7 @@
         }
       ],
       "fp/no-class": "off",
+      "fp/no-loops": "off",
       "fp/no-this": "off",
       "fp/no-rest-parameters": "off",
       "jsdoc/no-undefined-types": "off",
