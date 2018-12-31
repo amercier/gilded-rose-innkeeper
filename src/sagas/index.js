@@ -1,12 +1,11 @@
-import { takeEvery, all } from 'redux-saga/effects';
-import { ITEMS_FETCH } from '../constants/actionTypes';
-import { handleFetchItems } from './item';
+import { all } from 'redux-saga/effects';
+import { watchPollItemsSaga } from './item';
 
 /**
- * Start `handleFetchItems` on every `ITEMS_FETCH` action.
+ * Create the root saga.
  *
- * @returns {Generator} Generates one result from `handleFetchItems` for each `ITEMS_FETCH` action..
+ * @returns {Generator} The root saga.
  */
-export default function* watchItems() {
-  yield all([takeEvery(ITEMS_FETCH, handleFetchItems)]);
+export default function* rootSaga() {
+  yield all([watchPollItemsSaga()]);
 }

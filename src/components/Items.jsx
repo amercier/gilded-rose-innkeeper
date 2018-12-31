@@ -1,14 +1,14 @@
 import React from 'react';
 import { bool, string, number, arrayOf, shape } from 'prop-types';
 import { connect } from 'react-redux';
-import { Progress, Table, Tooltip } from 'antd';
+import { Progress, Table } from 'antd';
 import Highlighter from 'react-highlight-words';
 import styled from 'styled-components';
-import humanFormat from 'human-format';
-import formatNumber from 'simple-format-number';
 import { getVisibleItems } from '../selectors/item';
 import ConnectedNameSearch from './NameSearch';
 import ConnectedQualityFilter from './QualityFilter';
+import Price from './Price';
+import Trend from './Trend';
 
 const { Column } = Table;
 
@@ -32,11 +32,6 @@ const types = Object.keys(typeColors);
 
 const progressWidth = 48;
 
-const Info = styled.span`
-  border-bottom: 1px dotted;
-  cursor: help;
-`;
-
 const Highlight = styled.em`
   font-style: normal;
   background: #ffc069;
@@ -54,8 +49,6 @@ const FilterContainer = styled.div`
 /**
  * Render items in a table.
  *
- * TODO Add loading state.
- * TODO Refactor price to a separate <Price> component.
  * TODO Add pagination to Redux store.
  * TODO Implement onChange as per https://ant.design/components/table/#components-table-demo-ajax .
  * TODO Move sorting logic to Redux store and selectors.
@@ -91,20 +84,12 @@ const Items = ({ items, loading, nameSearch, qualityMin, qualityMax }) => (
       key="sellIn"
       dataIndex="sellIn"
       align="right"
-      render={(sellIn, { type }) =>
-        type === 'LEGENDARY' ? (
-          <Tooltip
-            title={formatNumber(sellIn, {
-              fractionDigits: 0,
-              symbols: { grouping: ' ' },
-            })}
-          >
-            <Info>{humanFormat(sellIn, { decimals: 1, separator: '' })}</Info>
-          </Tooltip>
-        ) : (
-          sellIn
-        )
-      }
+      render={(sellIn, { sellInTrend }) => (
+        <>
+          <Price value={sellIn} />
+          <Trend value={sellInTrend} style={{ marginLeft: '0.5rem' }} />
+        </>
+      )}
       sorter={(a, b) => a.sellIn - b.sellIn}
       filters={sellInFilters.map(([min, max]) => ({
         value: `${min}:${max}`,
@@ -120,13 +105,16 @@ const Items = ({ items, loading, nameSearch, qualityMin, qualityMax }) => (
       key="quality"
       dataIndex="quality"
       align="right"
-      render={quality => (
-        <Progress
-          type="circle"
-          percent={(100 * (quality - qualityMin)) / qualityMax}
-          format={() => quality}
-          width={progressWidth}
-        />
+      render={(quality, { qualityTrend }) => (
+        <>
+          <Progress
+            type="circle"
+            percent={(100 * (quality - qualityMin)) / qualityMax}
+            format={() => quality}
+            width={progressWidth}
+          />
+          <Trend value={qualityTrend} style={{ marginLeft: '0.5rem' }} />
+        </>
       )}
       sorter={(a, b) => a.quality - b.quality}
       filterDropdown={() => (
@@ -177,7 +165,7 @@ Items.propTypes = {
  */
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
-  loading: state.fetchingItems,
+  loading: state.fetchingItems && !state.fetchedItemsOnce,
   nameSearch: state.nameSearch,
   qualityMin: state.qualityMin,
   qualityMax: state.qualityMax,

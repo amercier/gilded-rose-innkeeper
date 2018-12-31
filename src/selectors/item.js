@@ -50,7 +50,7 @@ function getVisibleItems({
   qualityRangeStart,
   qualityRangeEnd,
 }) {
-  return items.filter(
+  return Object.values(items).filter(
     all(
       propertySearchFilter('name', nameSearch),
       propertyMinMaxFilter('quality', qualityRangeStart, qualityRangeEnd),

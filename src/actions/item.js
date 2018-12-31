@@ -1,9 +1,35 @@
 import {
+  ITEMS_POLL_START,
+  ITEMS_POLL_STOP,
   ITEMS_ADD,
   ITEMS_FETCH,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
 } from '../constants/actionTypes';
+import {
+  ITEMS_POLL_DELAY,
+  ITEMS_SLIDER_FILTER_DEBOUNCE,
+} from '../constants/config';
+
+/**
+ * Create an action to start polling items every ITEMS_POLL_DELAY ms, until a ITEMS_POLL_STOP action
+ * is triggered.
+ *
+ * @returns {Object} An action that consists in starting polling items.
+ */
+export const doStartPollingItems = () => ({
+  type: ITEMS_POLL_START,
+  delay: ITEMS_POLL_DELAY,
+});
+
+/**
+ * Create an action to stop polling items.
+ *
+ * @returns {Object} An action that consists in stopping polling items.
+ */
+export const doStopPollingItems = () => ({
+  type: ITEMS_POLL_STOP,
+});
 
 /**
  * Create an action to add items.
@@ -49,7 +75,7 @@ export const doQualityFilter = (rangeStart, rangeEnd) => ({
   rangeEnd,
   meta: {
     debounce: {
-      time: 200,
+      time: ITEMS_SLIDER_FILTER_DEBOUNCE,
     },
   },
 });

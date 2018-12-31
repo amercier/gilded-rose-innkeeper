@@ -13,6 +13,7 @@
     "react-scripts": "^2.1.2",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
+    "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.2",
     "simple-format-number": "^0.1.2",
     "styled-components": "^4.1.3"
@@ -84,6 +85,7 @@
         }
       ],
       "fp/no-class": "off",
+      "fp/no-loops": "off",
       "fp/no-this": "off",
       "fp/no-rest-parameters": "off",
       "jsdoc/no-undefined-types": "off",

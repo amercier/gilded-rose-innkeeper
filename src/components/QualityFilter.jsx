@@ -79,7 +79,7 @@ QualityFilter.propTypes = {
  * @returns {Object} Properties for <QualityFilter> component.
  */
 const mapStateToProps = state => ({
-  marks: state.items.reduce(
+  marks: Object.values(state.items).reduce(
     (acc, { quality }) => (quality in acc ? acc : [...acc, quality]),
     [],
   ),
