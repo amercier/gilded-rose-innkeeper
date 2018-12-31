@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price renders a tooltip for large numbers 1`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  prefixCls="ant-tooltip"
+  title="1 000"
+  transitionName="zoom-big-fast"
+>
+  <styled.span>
+    1k
+  </styled.span>
+</Tooltip>
+`;
+
+exports[`Price renders a tooltip for large numbers 2`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  prefixCls="ant-tooltip"
+  title="123 456"
+  transitionName="zoom-big-fast"
+>
+  <styled.span>
+    123.5k
+  </styled.span>
+</Tooltip>
+`;
+
+exports[`Price renders a tooltip for large numbers 3`] = `
+<Tooltip
+  arrowPointAtCenter={false}
+  autoAdjustOverflow={true}
+  mouseEnterDelay={0.1}
+  mouseLeaveDelay={0.1}
+  placement="top"
+  prefixCls="ant-tooltip"
+  title="123 456 789"
+  transitionName="zoom-big-fast"
+>
+  <styled.span>
+    123.5M
+  </styled.span>
+</Tooltip>
+`;

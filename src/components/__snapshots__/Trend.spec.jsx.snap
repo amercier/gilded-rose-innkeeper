@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Trend renders a green down arrow for positive numbers 1`] = `
+<Icon
+  style={
+    Object {
+      "color": "#52c41a",
+    }
+  }
+  type="caret-up"
+/>
+`;
+
+exports[`Trend renders a green down arrow for positive numbers 2`] = `
+<Icon
+  style={
+    Object {
+      "color": "#52c41a",
+    }
+  }
+  type="caret-up"
+/>
+`;
+
+exports[`Trend renders a green down arrow for positive numbers 3`] = `
+<Icon
+  style={
+    Object {
+      "color": "#52c41a",
+    }
+  }
+  type="caret-up"
+/>
+`;
+
+exports[`Trend renders a grey minus for 0 1`] = `
+<Icon
+  style={
+    Object {
+      "color": "#bfbfbf",
+    }
+  }
+  type="minus"
+/>
+`;
+
+exports[`Trend renders a red up arrow for negative numbers 1`] = `
+<Icon
+  style={
+    Object {
+      "color": "#f5222d",
+    }
+  }
+  type="caret-down"
+/>
+`;
+
+exports[`Trend renders a red up arrow for negative numbers 2`] = `
+<Icon
+  style={
+    Object {
+      "color": "#f5222d",
+    }
+  }
+  type="caret-down"
+/>
+`;
+
+exports[`Trend renders a red up arrow for negative numbers 3`] = `
+<Icon
+  style={
+    Object {
+      "color": "#f5222d",
+    }
+  }
+  type="caret-down"
+/>
+`;
