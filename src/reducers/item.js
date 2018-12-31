@@ -18,6 +18,62 @@ import {
  * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
  */
 
+/**
+ * @typedef ChangingItem
+ *
+ * Item with trends over time.
+ *
+ * @typedef {Item}
+ * @property {number} qualityTrend - Difference in quality during the last quality change.
+ * @property {number} sellInTrend - Difference in sellIn during the last sellIn change.
+ */
+
+/**
+ * Update an item with new.
+ *
+ * @param {Item|undefined} prevItem - Previous item data, if any.
+ * @param {Item} nextItem - New item data.
+ * @returns {ChangingItem} A new item with trends properties.
+ */
+function updatedItem(prevItem, nextItem) {
+  const qualityTrend =
+    prevItem === undefined
+      ? 0
+      : prevItem.qualityTrend || nextItem.quality - prevItem.quality;
+  const sellInTrend =
+    prevItem === undefined
+      ? 0
+      : prevItem.sellInTrend || nextItem.sellIn - prevItem.sellIn;
+  return {
+    ...nextItem,
+    qualityTrend,
+    sellInTrend,
+  };
+}
+
+/**
+ * Update the state with new items.
+ *
+ * @param {Object} prevState - Previous state.
+ * @param {Item[]} nextItems - New items.
+ * @returns {Object} The new state..
+ */
+function applyAddItems(prevState, nextItems) {
+  const prevItems = prevState.items;
+  return {
+    ...prevState,
+    items: nextItems.reduce(
+      (items, nextItem) => ({
+        [nextItem.id]: updatedItem(prevItems[nextItem.id], nextItem),
+        ...items,
+      }),
+      {},
+    ),
+    fetchingItems: false,
+    fetchedItemsOnce: true,
+  };
+}
+
 const INITIAL_STATE = {
   items: [],
   fetchingItems: false,
@@ -42,12 +98,7 @@ function itemReducer(state = INITIAL_STATE, action) {
       return { ...state, fetchingItems: true };
     }
     case ITEMS_ADD: {
-      return {
-        ...state,
-        items: action.items,
-        fetchingItems: false,
-        fetchedItemsOnce: true,
-      };
+      return applyAddItems(state, action.items);
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };
