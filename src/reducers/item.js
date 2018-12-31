@@ -39,11 +39,11 @@ function updatedItem(prevItem, nextItem) {
   const qualityTrend =
     prevItem === undefined
       ? 0
-      : prevItem.qualityTrend || nextItem.quality - prevItem.quality;
+      : nextItem.quality - prevItem.quality || prevItem.qualityTrend; // preserve previous trend if 0
   const sellInTrend =
     prevItem === undefined
       ? 0
-      : prevItem.sellInTrend || nextItem.sellIn - prevItem.sellIn;
+      : nextItem.sellIn - prevItem.sellIn || prevItem.sellInTrend; // preserve previous trend if 0
   return {
     ...nextItem,
     qualityTrend,
