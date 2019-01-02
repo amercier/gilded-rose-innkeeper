@@ -1,12 +1,89 @@
 import { delay } from 'redux-saga';
-import { call, put, race, take, takeEvery, all } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  race,
+  take,
+  takeEvery,
+  select,
+  all,
+} from 'redux-saga/effects';
 import { doFetchItems, doSetItems, doFetchItemError } from '../actions/item';
+import { doNotification } from '../actions/notification';
 import { API_URL_ITEMS } from '../constants/api';
 import {
   ITEMS_POLL_START,
   ITEMS_POLL_STOP,
   ITEMS_FETCH,
 } from '../constants/actionTypes';
+
+/**
+ * @typedef Item
+ *
+ * Item.
+ *
+ * @type {Object}
+ * @property {string} id - Item unique identifier.
+ * @property {string} name - Item name.
+ * @property {number} sellIn - Sell price.
+ * @property {number} quality - Quality (between 0 and 100).
+ * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
+ */
+
+/**
+ * @typedef ChangingItem
+ *
+ * Item with trends over time.
+ *
+ * @type {Item}
+ * @property {number} qualityTrend - Difference in quality during the last quality change.
+ * @property {number} sellInTrend - Difference in sellIn during the last sellIn change.
+ */
+
+/**
+ * @typedef ItemSet
+ *
+ * Items as stored in Redux state: indexed by IDs.
+ *
+ * @type {Object<string, ChangingItem}
+ */
+
+/**
+ * Update items based on previous state.
+ *
+ * TODO Move this logic to the API.
+ *
+ * @param {ItemSet} prevItems - Previous items indexed by IDs.
+ * @param {Item[]} items - New items set from the API.
+ * @returns {Array} The new items indexed by IDs (ItemSet), and the number of added, removed and
+ * udpated items (number).
+ */
+export function mergeItems(prevItems, items) {
+  return items.reduce(
+    ([nextItems, added, removed, updated], item) => {
+      const prevItem = prevItems[item.id];
+      const qualityTrend = prevItem && prevItem.quality - item.quality;
+      const sellInTrend = prevItem && prevItem.sellIn - item.sellIn;
+      return [
+        // Item set
+        {
+          ...nextItems,
+          [item.id]: {
+            ...item,
+            qualityTrend:
+              qualityTrend || (prevItem ? prevItem.qualityTrend : 0),
+            sellInTrend: sellInTrend || (prevItem ? prevItem.sellInTrend : 0),
+          },
+        },
+        // Counts
+        prevItem ? added : added + 1,
+        prevItem ? removed - 1 : removed,
+        qualityTrend || sellInTrend ? updated + 1 : updated,
+      ];
+    },
+    [{}, 0, Object.keys(prevItems).length, 0],
+  );
+}
 
 /**
  * Fetch items from the API.
@@ -28,7 +105,26 @@ export async function fetchItems() {
 export function* handleFetchItems() {
   try {
     const items = yield call(fetchItems);
-    yield put(doSetItems(items));
+    const [prevItems, fetchedItemsOnce] = yield select(state => [
+      state.items,
+      state.fetchedItemsOnce,
+    ]);
+    const [nextItems, added, removed, updated] = mergeItems(prevItems, items);
+    yield put(doSetItems(nextItems));
+
+    // Create a notification if items have been added, modified, or updated.
+    if (fetchedItemsOnce && (added || removed || updated)) {
+      yield put(
+        doNotification(
+          'Items have changed!',
+          `
+            ${added || 'No'} new item${added > 1 ? 's' : ''} have been added.
+            ${removed || 'No'} item${removed > 1 ? 's' : ''} have been removed.
+            ${updated || 'No'} item${updated > 1 ? 's' : ''} have been updated.
+          `,
+        ),
+      );
+    }
   } catch (error) {
     yield put(doFetchItemError(error));
   }

@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 import itemsSaga from './item';
+import notificationsSaga from './notification';
 
 /**
  * Create the root saga.
@@ -7,5 +8,5 @@ import itemsSaga from './item';
  * @returns {Generator} The root saga.
  */
 export default function* rootSaga() {
-  yield all([itemsSaga()]);
+  yield all([itemsSaga(), notificationsSaga()]);
 }

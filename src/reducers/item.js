@@ -6,71 +6,6 @@ import {
   ITEMS_QUALITY_FILTER,
 } from '../constants/actionTypes';
 
-/**
- * @typedef Item
- *
- * Item.
- *
- * @type {Object}
- * @property {string} id - Item unique identifier.
- * @property {string} name - Item name.
- * @property {number} sellIn - Sell price.
- * @property {number} quality - Quality (between 0 and 100).
- * @property {string} type - Type of item: "STANDARD", "CONJURED", "BACKSTAGE_PASS" or "LEGENDARY".
- */
-
-/**
- * @typedef ChangingItem
- *
- * Item with trends over time.
- *
- * @typedef {Item}
- * @property {number} qualityTrend - Difference in quality during the last quality change.
- * @property {number} sellInTrend - Difference in sellIn during the last sellIn change.
- */
-
-/**
- * Update an item with new.
- *
- * @param {Item|undefined} prevItem - Previous item data, if any.
- * @param {Item} nextItem - New item data.
- * @returns {ChangingItem} A new item with trends properties.
- */
-function updatedItem(prevItem, nextItem) {
-  const qualityTrend =
-    prevItem === undefined
-      ? 0
-      : nextItem.quality - prevItem.quality || prevItem.qualityTrend; // preserve previous trend if 0
-  const sellInTrend =
-    prevItem === undefined
-      ? 0
-      : nextItem.sellIn - prevItem.sellIn || prevItem.sellInTrend; // preserve previous trend if 0
-  return {
-    ...nextItem,
-    qualityTrend,
-    sellInTrend,
-  };
-}
-
-/**
- * Update items based on previous state.
- *
- * TODO Move this logic to the API.
- *
- * @param {Item[]} prevItems - Previous items.
- * @param {Item[]} nextItems - New items.
- * @returns {Item[]} The new items.
- */
-function updatedItems(prevItems, nextItems) {
-  return nextItems.reduce(
-    (items, item) => ({
-      [item.id]: updatedItem(prevItems[item.id], item),
-      ...items,
-    }),
-    {},
-  );
-}
-
 const INITIAL_STATE = {
   items: [],
   fetchingItems: false,
@@ -108,7 +43,7 @@ function itemReducer(state = INITIAL_STATE, action) {
     case ITEMS_SET: {
       return {
         ...state,
-        items: updatedItems(state.items, action.items),
+        items: action.items,
         fetchingItems: false,
         fetchedItemsOnce: true,
         fetchItemsError: null,
