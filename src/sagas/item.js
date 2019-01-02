@@ -1,5 +1,5 @@
 import { call, put, race, take, takeEvery, all } from 'redux-saga/effects';
-import { doFetchItems, doAddItems } from '../actions/item';
+import { doFetchItems, doSetItems } from '../actions/item';
 import { API_URL_ITEMS } from '../constants/api';
 import {
   ITEMS_POLL_START,
@@ -28,13 +28,13 @@ export async function fetchItems() {
 /**
  * Generate two effects:
  * 1. A call to fetchItems
- * 2. A new ITEMS_ADD actions with the items returned by fetchItems.
+ * 2. A new ITEMS_SET actions with the items returned by fetchItems.
  *
- * @returns {Generator} A generator that yields a call to fetchItems and a ITEMS_ADD action.
+ * @returns {Generator} A generator that yields a call to fetchItems and a ITEMS_SET action.
  */
 export function* handleFetchItems() {
   const items = yield call(fetchItems);
-  yield put(doAddItems(items));
+  yield put(doSetItems(items));
 }
 
 /**
@@ -43,7 +43,7 @@ export function* handleFetchItems() {
  * 2. A call to wait() with the given delay.
  *
  * @param {number} delay - Time to wait before next poll, in ms.
- * @returns {Generator} A generator that yields infinitely a ITEMS_ADD action and a call to wait.
+ * @returns {Generator} A generator that yields infinitely a ITEMS_SET action and a call to wait.
  */
 export function* handlePollItems(delay) {
   while (true) {

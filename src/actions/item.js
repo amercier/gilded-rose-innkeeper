@@ -1,7 +1,7 @@
 import {
   ITEMS_POLL_START,
   ITEMS_POLL_STOP,
-  ITEMS_ADD,
+  ITEMS_SET,
   ITEMS_FETCH,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
@@ -37,8 +37,8 @@ export const doStopPollingItems = () => ({
  * @param {Item[]} items - Items to add.
  * @returns {Object} An action that consists in adding the given items.
  */
-export const doAddItems = items => ({
-  type: ITEMS_ADD,
+export const doSetItems = items => ({
+  type: ITEMS_SET,
   items,
 });
 

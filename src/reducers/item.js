@@ -1,6 +1,6 @@
 import {
   ITEMS_FETCH,
-  ITEMS_ADD,
+  ITEMS_SET,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
 } from '../constants/actionTypes';
@@ -97,7 +97,7 @@ function itemReducer(state = INITIAL_STATE, action) {
     case ITEMS_FETCH: {
       return { ...state, fetchingItems: true };
     }
-    case ITEMS_ADD: {
+    case ITEMS_SET: {
       return applyAddItems(state, action.items);
     }
     case ITEMS_NAME_SEARCH: {
