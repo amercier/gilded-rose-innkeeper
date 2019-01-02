@@ -1,5 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { watchPollItemsSaga } from './item';
+import itemsSaga from './item';
 
 /**
  * Create the root saga.
@@ -7,5 +7,5 @@ import { watchPollItemsSaga } from './item';
  * @returns {Generator} The root saga.
  */
 export default function* rootSaga() {
-  yield all([watchPollItemsSaga()]);
+  yield all([itemsSaga()]);
 }
