@@ -63,8 +63,21 @@ const FilterContainer = styled.div`
  * @property {number} qualityMax - Minimum quality (Default: `100`).
  * @returns {React.Element} The rendered element.
  */
-const Items = ({ items, loading, nameSearch, qualityMin, qualityMax }) => (
-  <Table dataSource={items} loading={loading} pagination={false} rowKey="id">
+const Items = ({
+  items,
+  loading,
+  emptyText,
+  nameSearch,
+  qualityMin,
+  qualityMax,
+}) => (
+  <Table
+    dataSource={items}
+    loading={loading}
+    locale={{ emptyText }}
+    pagination={false}
+    rowKey="id"
+  >
     <Column
       title={<ConnectedNameSearch />}
       key="name"
@@ -152,6 +165,7 @@ Items.propTypes = {
     }).isRequired,
   ).isRequired,
   loading: bool.isRequired,
+  emptyText: string.isRequired,
   nameSearch: string.isRequired,
   qualityMin: number.isRequired,
   qualityMax: number.isRequired,
@@ -166,6 +180,9 @@ Items.propTypes = {
 const mapStateToProps = state => ({
   items: getVisibleItems(state),
   loading: state.fetchingItems && !state.fetchedItemsOnce,
+  emptyText: state.fetchItemsError
+    ? 'An error occurred while retrieving the items list.'
+    : 'No items for sale.',
   nameSearch: state.nameSearch,
   qualityMin: state.qualityMin,
   qualityMax: state.qualityMax,

@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga';
 import { call, put, race, take, takeEvery, all } from 'redux-saga/effects';
-import { doFetchItems, doSetItems } from '../actions/item';
+import { doFetchItems, doSetItems, doFetchItemError } from '../actions/item';
 import { API_URL_ITEMS } from '../constants/api';
 import {
   ITEMS_POLL_START,
@@ -26,8 +26,12 @@ export async function fetchItems() {
  * @returns {Generator} A generator that yields a call to fetchItems and a ITEMS_SET action.
  */
 export function* handleFetchItems() {
-  const items = yield call(fetchItems);
-  yield put(doSetItems(items));
+  try {
+    const items = yield call(fetchItems);
+    yield put(doSetItems(items));
+  } catch (error) {
+    yield put(doFetchItemError(error));
+  }
 }
 
 /**

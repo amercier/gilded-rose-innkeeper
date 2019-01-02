@@ -1,8 +1,9 @@
 import {
   ITEMS_POLL_START,
   ITEMS_POLL_STOP,
-  ITEMS_SET,
   ITEMS_FETCH,
+  ITEMS_FETCH_ERROR,
+  ITEMS_SET,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
 } from '../constants/actionTypes';
@@ -49,6 +50,17 @@ export const doSetItems = items => ({
  */
 export const doFetchItems = () => ({
   type: ITEMS_FETCH,
+});
+
+/**
+ * Create an action to handle an items fetch error.
+ *
+ * @param {Error} error - Error thrown during fetch.
+ * @returns {Object} An action that consists in hnadling items fetch error.
+ */
+export const doFetchItemError = error => ({
+  type: ITEMS_FETCH_ERROR,
+  error,
 });
 
 /**

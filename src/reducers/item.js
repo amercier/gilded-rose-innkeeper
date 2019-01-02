@@ -1,5 +1,6 @@
 import {
   ITEMS_FETCH,
+  ITEMS_FETCH_ERROR,
   ITEMS_SET,
   ITEMS_NAME_SEARCH,
   ITEMS_QUALITY_FILTER,
@@ -52,32 +53,29 @@ function updatedItem(prevItem, nextItem) {
 }
 
 /**
- * Update the state with new items.
+ * Update items based on previous state.
  *
- * @param {Object} prevState - Previous state.
+ * TODO Move this logic to the API.
+ *
+ * @param {Item[]} prevItems - Previous items.
  * @param {Item[]} nextItems - New items.
- * @returns {Object} The new state..
+ * @returns {Item[]} The new items.
  */
-function applyAddItems(prevState, nextItems) {
-  const prevItems = prevState.items;
-  return {
-    ...prevState,
-    items: nextItems.reduce(
-      (items, nextItem) => ({
-        [nextItem.id]: updatedItem(prevItems[nextItem.id], nextItem),
-        ...items,
-      }),
-      {},
-    ),
-    fetchingItems: false,
-    fetchedItemsOnce: true,
-  };
+function updatedItems(prevItems, nextItems) {
+  return nextItems.reduce(
+    (items, item) => ({
+      [item.id]: updatedItem(prevItems[item.id], item),
+      ...items,
+    }),
+    {},
+  );
 }
 
 const INITIAL_STATE = {
   items: [],
   fetchingItems: false,
   fetchedItemsOnce: false,
+  fetchItemsError: null,
   nameSearch: '',
   qualityMin: 0,
   qualityMax: 100,
@@ -97,8 +95,24 @@ function itemReducer(state = INITIAL_STATE, action) {
     case ITEMS_FETCH: {
       return { ...state, fetchingItems: true };
     }
+    case ITEMS_FETCH_ERROR: {
+      // TODO Display a notification when the error occur while items exist.
+      // TODO Detect whether Internet connection is lost (normal behavior) vs server error.
+      return {
+        ...state,
+        fetchingItems: false,
+        fetchedItemsOnce: true,
+        fetchItemsError: action.error,
+      };
+    }
     case ITEMS_SET: {
-      return applyAddItems(state, action.items);
+      return {
+        ...state,
+        items: updatedItems(state.items, action.items),
+        fetchingItems: false,
+        fetchedItemsOnce: true,
+        fetchItemsError: null,
+      };
     }
     case ITEMS_NAME_SEARCH: {
       return { ...state, nameSearch: action.query };
