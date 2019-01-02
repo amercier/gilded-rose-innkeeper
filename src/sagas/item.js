@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga';
 import { call, put, race, take, takeEvery, all } from 'redux-saga/effects';
 import { doFetchItems, doSetItems } from '../actions/item';
 import { API_URL_ITEMS } from '../constants/api';
@@ -6,14 +7,6 @@ import {
   ITEMS_POLL_STOP,
   ITEMS_FETCH,
 } from '../constants/actionTypes';
-
-/**
- * Wait a given time.
- *
- * @param {number} duration - Time to wait in milliseconds.
- * @returns {Promise<void>} A Promise that always resolves after `duration` ms.
- */
-const wait = duration => new Promise(resolve => setTimeout(resolve, duration));
 
 /**
  * Fetch items from the API.
@@ -42,13 +35,13 @@ export function* handleFetchItems() {
  * 1. A new ITEMS_FETCH action.
  * 2. A call to wait() with the given delay.
  *
- * @param {number} delay - Time to wait before next poll, in ms.
+ * @param {number} ms - Time to wait before next poll, in ms.
  * @returns {Generator} A generator that yields infinitely a ITEMS_SET action and a call to wait.
  */
-export function* handlePollItems(delay) {
+export function* handlePollItems(ms) {
   while (true) {
     yield put(doFetchItems());
-    yield call(wait, delay);
+    yield call(delay, ms);
   }
 }
 
@@ -63,8 +56,8 @@ export function* handlePollItems(delay) {
  */
 function* watchPollItemsStart() {
   while (true) {
-    const { delay } = yield take(ITEMS_POLL_START);
-    yield race([call(handlePollItems, delay), take(ITEMS_POLL_STOP)]);
+    const action = yield take(ITEMS_POLL_START);
+    yield race([call(handlePollItems, action.delay), take(ITEMS_POLL_STOP)]);
   }
 }
 
