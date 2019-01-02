@@ -1,19 +1,12 @@
+import { delay } from 'redux-saga';
 import { call, put, race, take, takeEvery, all } from 'redux-saga/effects';
-import { doFetchItems, doAddItems } from '../actions/item';
+import { doFetchItems, doSetItems, doFetchItemError } from '../actions/item';
 import { API_URL_ITEMS } from '../constants/api';
 import {
   ITEMS_POLL_START,
   ITEMS_POLL_STOP,
   ITEMS_FETCH,
 } from '../constants/actionTypes';
-
-/**
- * Wait a given time.
- *
- * @param {number} duration - Time to wait in milliseconds.
- * @returns {Promise<void>} A Promise that always resolves after `duration` ms.
- */
-const wait = duration => new Promise(resolve => setTimeout(resolve, duration));
 
 /**
  * Fetch items from the API.
@@ -28,13 +21,17 @@ export async function fetchItems() {
 /**
  * Generate two effects:
  * 1. A call to fetchItems
- * 2. A new ITEMS_ADD actions with the items returned by fetchItems.
+ * 2. A new ITEMS_SET actions with the items returned by fetchItems.
  *
- * @returns {Generator} A generator that yields a call to fetchItems and a ITEMS_ADD action.
+ * @returns {Generator} A generator that yields a call to fetchItems and a ITEMS_SET action.
  */
 export function* handleFetchItems() {
-  const items = yield call(fetchItems);
-  yield put(doAddItems(items));
+  try {
+    const items = yield call(fetchItems);
+    yield put(doSetItems(items));
+  } catch (error) {
+    yield put(doFetchItemError(error));
+  }
 }
 
 /**
@@ -42,13 +39,13 @@ export function* handleFetchItems() {
  * 1. A new ITEMS_FETCH action.
  * 2. A call to wait() with the given delay.
  *
- * @param {number} delay - Time to wait before next poll, in ms.
- * @returns {Generator} A generator that yields infinitely a ITEMS_ADD action and a call to wait.
+ * @param {number} ms - Time to wait before next poll, in ms.
+ * @returns {Generator} A generator that yields infinitely a ITEMS_SET action and a call to wait.
  */
-export function* handlePollItems(delay) {
+export function* handlePollItems(ms) {
   while (true) {
     yield put(doFetchItems());
-    yield call(wait, delay);
+    yield call(delay, ms);
   }
 }
 
@@ -63,8 +60,8 @@ export function* handlePollItems(delay) {
  */
 function* watchPollItemsStart() {
   while (true) {
-    const { delay } = yield take(ITEMS_POLL_START);
-    yield race([call(handlePollItems, delay), take(ITEMS_POLL_STOP)]);
+    const action = yield take(ITEMS_POLL_START);
+    yield race([call(handlePollItems, action.delay), take(ITEMS_POLL_STOP)]);
   }
 }
 
