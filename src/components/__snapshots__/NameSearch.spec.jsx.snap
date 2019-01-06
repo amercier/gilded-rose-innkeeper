@@ -16,7 +16,6 @@ exports[`NameSearch renders its components 1`] = `
       type="search"
     />
   }
-  prefixCls="ant-input"
   suffix={
     <Icon
       onClick={[Function]}

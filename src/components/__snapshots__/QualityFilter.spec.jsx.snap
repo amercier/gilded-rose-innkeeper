@@ -30,9 +30,7 @@ exports[`QualityFilter renders its components 1`] = `
   max={100}
   min={0}
   onChange={[Function]}
-  prefixCls="ant-slider"
   range={true}
   tipFormatter={[Function]}
-  tooltipPrefixCls="ant-tooltip"
 />
 `;

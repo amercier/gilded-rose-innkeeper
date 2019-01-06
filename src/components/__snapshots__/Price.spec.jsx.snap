@@ -7,7 +7,6 @@ exports[`Price renders a tooltip for large numbers 1`] = `
   mouseEnterDelay={0.1}
   mouseLeaveDelay={0.1}
   placement="top"
-  prefixCls="ant-tooltip"
   title="1 000"
   transitionName="zoom-big-fast"
 >
@@ -24,7 +23,6 @@ exports[`Price renders a tooltip for large numbers 2`] = `
   mouseEnterDelay={0.1}
   mouseLeaveDelay={0.1}
   placement="top"
-  prefixCls="ant-tooltip"
   title="123 456"
   transitionName="zoom-big-fast"
 >
@@ -41,7 +39,6 @@ exports[`Price renders a tooltip for large numbers 3`] = `
   mouseEnterDelay={0.1}
   mouseLeaveDelay={0.1}
   placement="top"
-  prefixCls="ant-tooltip"
   title="123 456 789"
   transitionName="zoom-big-fast"
 >
