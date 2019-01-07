@@ -9,22 +9,9 @@ import ConnectedNameSearch from './NameSearch';
 import ConnectedQualityFilter from './QualityFilter';
 import Price from './Price';
 import Trend from './Trend';
+import { typeColors, typeLabels } from './config';
 
 const { Column } = Table;
-
-const typeLabels = {
-  STANDARD: 'Standard',
-  CONJURED: 'Conjured',
-  BACKSTAGE_PASS: 'Backstage pass',
-  LEGENDARY: 'Legendary',
-};
-
-const typeColors = {
-  STANDARD: '#000',
-  CONJURED: '#52c41a',
-  BACKSTAGE_PASS: '#1890ff',
-  LEGENDARY: '#ff7a45',
-};
 
 const sellInFilters = [[0, 2], [2, 5], [5, 10], [10, 20], [20, +Infinity]];
 
