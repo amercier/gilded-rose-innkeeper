@@ -3,6 +3,7 @@ import { Icon } from 'antd';
 import styled from 'styled-components';
 import { ExternalLink } from './Link';
 import Items from './Items';
+import ConnectedItemsChart from './ItemsChart';
 
 const authorLink = (
   <ExternalLink href="https://github.com/amercier">Alex Mercier</ExternalLink>
@@ -75,6 +76,7 @@ const App = () => (
     </Header>
     <Content>
       <Items />
+      <ConnectedItemsChart />
     </Content>
     <Footer>
       Created by {authorLink} for {employerLink}.
