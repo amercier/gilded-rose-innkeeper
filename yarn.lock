@@ -8304,9 +8304,10 @@ react-error-overlay@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.1.tgz#56f0439f001ff3588da0f479a86482ccb1e708cb"
 
-react-highlight-words@^0.15.0:
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/react-highlight-words/-/react-highlight-words-0.15.0.tgz#58aa74b5e871b2fb66ebb29e83e037639bd6d651"
+react-highlight-words@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/react-highlight-words/-/react-highlight-words-0.16.0.tgz#4b4b9824e3d2b98789d3e3b3aedb5e961ae1b7cf"
+  integrity sha512-q34TwCSJOL+5pVDv6LUj3amaoyXdNDwd7zRqVAvceOrO9g1haWLAglK6WkGLMNUa3PFN8EgGedLg/k8Gpndxqg==
   dependencies:
     highlight-words-core "^1.2.0"
     memoize-one "^4.0.0"
