@@ -35,7 +35,7 @@ const ChartContainerInner = styled.div`
  * Items chart.
  *
  * @param {Object} props - React component properties.
- * @property {Item[]} items - Items to render.
+ * @property {module:sagas/item.Item[]} items - Items to render.
  * @returns {React.Element} The rendered element.
  */
 const ItemsChart = ({ items }) => {
@@ -93,7 +93,7 @@ ItemsChart.propTypes = {
 /**
  * Map Redux state to <ItemsChart> properties.
  *
- * @param {Item[]} state - Redux state.
+ * @param {module:sagas/item.Item[]} state - Redux state.
  * @returns {Object} Properties for <ItemsChart> component.
  */
 const mapStateToProps = state => ({

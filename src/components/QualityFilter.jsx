@@ -1,5 +1,5 @@
 import React from 'react';
-import { number, func } from 'prop-types';
+import { number, func, arrayOf } from 'prop-types';
 import { connect } from 'react-redux';
 import { Slider } from 'antd';
 import { doQualityFilter } from '../actions/item';
@@ -67,6 +67,7 @@ export const QualityFilter = ({
 QualityFilter.propTypes = {
   min: number.isRequired,
   max: number.isRequired,
+  marks: arrayOf(number).isRequired,
   rangeStart: number.isRequired,
   rangeEnd: number.isRequired,
   onChange: func.isRequired,
@@ -75,7 +76,7 @@ QualityFilter.propTypes = {
 /**
  * Map Redux state to <QualityFilter> properties.
  *
- * @param {Item[]} state - Redux state.
+ * @param {module:sagas/item.Item[]} state - Redux state.
  * @returns {Object} Properties for <QualityFilter> component.
  */
 const mapStateToProps = state => ({

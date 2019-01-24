@@ -15,6 +15,19 @@ const icons = {
 };
 
 /**
+ * Get the trend key from a value.
+ *
+ * @param {number} value - A number.
+ * @returns {string} One of: 'stable' (0), 'down' (<0) or 'up' (>0).
+ */
+function getTrend(value) {
+  if (value === 0) {
+    return 'stable';
+  }
+  return value < 0 ? 'down' : 'up';
+}
+
+/**
  * Display a price and an indicator about its trend.
  *
  * @param {Object} props - React component properties.
@@ -23,7 +36,7 @@ const icons = {
  * @returns {React.Element} The rendered element.
  */
 const Trend = ({ value, style }) => {
-  const trend = value === 0 ? 'stable' : value < 0 ? 'down' : 'up';
+  const trend = getTrend(value);
   return (
     <Icon type={icons[trend]} style={{ ...style, color: colors[trend] }} />
   );
@@ -31,7 +44,7 @@ const Trend = ({ value, style }) => {
 
 Trend.propTypes = {
   value: number.isRequired,
-  style: object,
+  style: object, // eslint-disable-line react/forbid-prop-types
 };
 
 Trend.defaultProps = {

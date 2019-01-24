@@ -12,7 +12,7 @@ describe('mergeItems', () => {
       prevItems,
       Object.values(prevItems),
     );
-    expect(nextItems).toEqual(prevItems);
+    expect(nextItems).toStrictEqual(prevItems);
     expect(added).toBe(0);
     expect(removed).toBe(0);
     expect(updated).toBe(0);

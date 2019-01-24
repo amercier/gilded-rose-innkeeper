@@ -34,11 +34,13 @@ describe('QualityFilter (Redux-connected)', () => {
   };
 
   it('renders without crashing', () => {
-    mount(
-      <Provider store={mockStore(initialState)}>
-        <ConnectedQualityFilter />
-      </Provider>,
-    );
+    expect(() => {
+      mount(
+        <Provider store={mockStore(initialState)}>
+          <ConnectedQualityFilter />
+        </Provider>,
+      );
+    }).not.toThrow();
   });
 
   it('uses store properties as <Slider> value', () => {
@@ -52,7 +54,7 @@ describe('QualityFilter (Redux-connected)', () => {
     expect(min).toBe(initialState.qualityMin);
     expect(max).toBe(initialState.qualityMax);
     expect(marks).toMatchSnapshot();
-    expect(defaultValue).toEqual([
+    expect(defaultValue).toStrictEqual([
       initialState.qualityRangeStart,
       initialState.qualityRangeEnd,
     ]);
@@ -68,7 +70,7 @@ describe('QualityFilter (Redux-connected)', () => {
     const sliderComponent = qualityFilter.find(Slider).first();
     sliderComponent.props().onChange([20, 90]);
     sliderComponent.props().onChange([20, 80]);
-    expect(store.getActions()).toEqual([
+    expect(store.getActions()).toStrictEqual([
       doQualityFilter(20, 90),
       doQualityFilter(20, 80),
     ]);

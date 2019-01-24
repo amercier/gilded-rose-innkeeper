@@ -20,4 +20,4 @@ ExternalLink.propTypes = {
   children: node.isRequired,
 };
 
-export { ExternalLink };
+export default ExternalLink;

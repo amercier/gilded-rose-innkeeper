@@ -43,7 +43,7 @@ const FilterContainer = styled.div`
  * TODO Move type filtering logic to Redux store and selectors.
  *
  * @param {Object} props - React component properties.
- * @property {Item[]} items - Items to render.
+ * @property {module:sagas/item.Item[]} items - Items to render.
  * @property {boolean} loading - Whether items are being loaded.
  * @property {string} nameSearch - Name search query.
  * @property {number} qualityMin - Minimum quality (Default: `0`).
@@ -161,7 +161,7 @@ Items.propTypes = {
 /**
  * Map Redux state to <Items> properties.
  *
- * @param {Item[]} state - Redux state.
+ * @param {module:sagas/item.Item[]} state - Redux state.
  * @returns {Object} Properties for <Items> component.
  */
 const mapStateToProps = state => ({

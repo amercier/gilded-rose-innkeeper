@@ -35,7 +35,7 @@ export const doStopPollingItems = () => ({
 /**
  * Create an action to add items.
  *
- * @param {Item[]} items - Items to add.
+ * @param {module:sagas/item.Item[]} items - Items to add.
  * @returns {Object} An action that consists in adding the given items.
  */
 export const doSetItems = items => ({

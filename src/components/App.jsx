@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'antd';
 import styled from 'styled-components';
-import { ExternalLink } from './Link';
+import ExternalLink from './ExternalLink';
 import Items from './Items';
 import ConnectedItemsChart from './ItemsChart';
 
