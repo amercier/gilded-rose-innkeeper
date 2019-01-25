@@ -46,7 +46,7 @@ NameSearch.propTypes = {
 /**
  * Map Redux state to <NameSearch> properties.
  *
- * @param {Item[]} state - Redux state.
+ * @param {module:sagas/item.Item[]} state - Redux state.
  * @returns {Object} Properties for <NameSearch> component.
  */
 const mapStateToProps = state => ({

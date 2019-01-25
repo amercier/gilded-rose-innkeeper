@@ -6,7 +6,7 @@
  * @returns {Function} - A function of the type: `(subject: Object) => boolean`, that returns `true`
  * if `subject[property]` contains `query`, or `false` otherwise.
  */
-function propertySearchFilter(property, query) {
+export function propertySearchFilter(property, query) {
   const searchQuery = query.toLowerCase();
   return subject => subject[property].toLowerCase().includes(searchQuery);
 }
@@ -21,7 +21,7 @@ function propertySearchFilter(property, query) {
  * `false` if `subject[property]` is lower than `min` or higher than `max`. Otherwise returns
  * `true`.
  */
-function propertyMinMaxFilter(property, min, max) {
+export function propertyMinMaxFilter(property, min, max) {
   return subject => subject[property] >= min && subject[property] <= max;
 }
 
@@ -32,7 +32,7 @@ function propertyMinMaxFilter(property, min, max) {
  * @returns {Function} - A function of the type: `(subject: Object) => boolean`, that returns `true`
  * if ALL filters return `true`, `false` if ANY of the filters returns `false`.
  */
-function all(...filters) {
+export function all(...filters) {
   return subject => filters.every(filter => filter(subject));
 }
 
@@ -42,9 +42,9 @@ function all(...filters) {
  * Right now all items are visible, so we just return all of them.
  *
  * @param {Object} state - Redux state.
- * @returns {Item[]} All visible items.
+ * @returns {module:sagas/item.Item[]} All visible items.
  */
-function getVisibleItems({
+export function getVisibleItems({
   items,
   nameSearch,
   qualityRangeStart,
@@ -57,5 +57,3 @@ function getVisibleItems({
     ),
   );
 }
-
-export { getVisibleItems };

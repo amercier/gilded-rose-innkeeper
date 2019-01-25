@@ -4,6 +4,7 @@
     "antd": "^3.12.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "eslint-config-amercier": "^0.2.0",
     "human-format": "^0.10.1",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
@@ -23,11 +24,6 @@
     "codecov": "^3.1.0",
     "cross-env": "^5.2.0",
     "enzyme-to-json": "^3.3.5",
-    "eslint-config-jsdoc-strict": "^2.0.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-config-react-redux": "^1.0.6",
-    "eslint-plugin-jsdoc": "^4.0.0",
-    "eslint-plugin-prettier": "^3.0.0",
     "husky": "^1.2.1",
     "lint-staged": "^8.1.0",
     "npm-run-all": "^4.1.5",
@@ -69,29 +65,11 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-redux",
-      "jsdoc-strict",
-      "plugin:prettier/recommended",
-      "prettier",
-      "prettier/react",
-      "prettier/unicorn"
+      "amercier/create-react-app",
+      "amercier/with/redux",
+      "amercier/with/redux-saga"
     ],
     "rules": {
-      "react/jsx-filename-extension": [
-        "error",
-        {
-          "extensions": [
-            ".jsx"
-          ]
-        }
-      ],
-      "fp/no-class": "off",
-      "fp/no-let": "off",
-      "fp/no-loops": "off",
-      "fp/no-mutation": "off",
-      "fp/no-rest-parameters": "off",
-      "fp/no-this": "off",
-      "jsdoc/no-undefined-types": "off",
       "jsdoc/require-example": "off"
     }
   },

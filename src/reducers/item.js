@@ -25,7 +25,7 @@ const INITIAL_STATE = {
  * @param {string} action - Action type and data.
  * @returns {Object} Next state.
  */
-function itemReducer(state = INITIAL_STATE, action) {
+export default function itemReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ITEMS_FETCH: {
       return { ...state, fetchingItems: true };
@@ -63,5 +63,3 @@ function itemReducer(state = INITIAL_STATE, action) {
       return state;
   }
 }
-
-export default itemReducer;

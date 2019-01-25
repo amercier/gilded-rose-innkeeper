@@ -19,11 +19,13 @@ describe('NameSearch (Redux-connected)', () => {
   const mockStore = configureStore();
 
   it('renders without crashing', () => {
-    mount(
-      <Provider store={mockStore({ nameSearch: '' })}>
-        <ConnectedNameSearch />
-      </Provider>,
-    );
+    expect(() => {
+      mount(
+        <Provider store={mockStore({ nameSearch: '' })}>
+          <ConnectedNameSearch />
+        </Provider>,
+      );
+    }).not.toThrow();
   });
 
   it('uses "nameSearch" store property as <Input> value', () => {
@@ -46,6 +48,6 @@ describe('NameSearch (Redux-connected)', () => {
     const inputComponent = nameSearch.find(Input).first();
     const target = { value: 'NEW VALUE' };
     inputComponent.props().onChange({ target });
-    expect(store.getActions()).toEqual([doNameSearch('NEW VALUE')]);
+    expect(store.getActions()).toStrictEqual([doNameSearch('NEW VALUE')]);
   });
 });
