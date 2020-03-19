@@ -7,7 +7,7 @@
     "eslint-config-amercier": "^0.2.0",
     "human-format": "^0.10.1",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
+    "react": "^16.13.1",
     "react-dom": "^16.7.0",
     "react-highlight-words": "^0.16.0",
     "react-redux": "^6.0.0",
